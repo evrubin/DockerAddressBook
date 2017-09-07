@@ -38,6 +38,9 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('fetchContactList', function(){
+    socket.emit('getContactList', contacts);
+  });
 });
  http.listen(process.env.PORT || 8080, function(){
    console.log('listening on', http.address().port);
