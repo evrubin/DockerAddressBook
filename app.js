@@ -13,7 +13,6 @@
  app.use("/",mainRouter);
  app.use("/addContact",mainRouter);
  app.use("/viewContacts",mainRouter);
-
  //Add an array for the storage of contacts:
  contacts = [];
 
@@ -34,14 +33,31 @@ io.on('connection', function(socket){
     }
     else{
       contacts.push(data);
+      //Sort the object alphabetically
+      //Future functionality to sort by other options
+      contacts.sort(orderBy("name"));
       socket.emit('addSuccess');
     }
   });
+
+  //Function to help sort the list
+  function orderBy(prop) {
+    return function(a, b){
+        if (a[prop] > b[prop]){
+            return 1;
+        }
+        else if (a[prop] < b[prop]){
+            return -1;
+        }
+        return 0;
+    }
+  }
 
   socket.on('fetchContactList', function(){
     socket.emit('getContactList', contacts);
   });
 });
+
  http.listen(process.env.PORT || 8080, function(){
    console.log('listening on', http.address().port);
  });
