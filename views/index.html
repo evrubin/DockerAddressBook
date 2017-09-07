@@ -1,0 +1,129 @@
+<link rel = "stylesheet" href="/cdn/css/bootstrap/css/bootstrap.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+var socket = io();
+
+function logout(){
+  //get the players username
+  result = getCookie("username");
+  //remove the player from the array of users
+  socket.emit('removeUser',result)
+  //delete the cookie from the list of username cookies
+  deleteCookie(result);
+}
+
+//will access data accross the pages
+function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = document.cookie.length;
+            }
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return "";
+}
+
+//will delete a cookie from the 'cookie jar'
+function deleteCookie(c_name){
+  createCookie("username","",-1);
+}
+
+//will create a cookie to store data acccross the pages
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+</script>
+
+<head>
+    <title>Address Book Home</title>
+    <meta charset="utf-8" />
+    <style>
+		.flex-container {
+		    display: -webkit-flex;
+		    display: flex;
+		    -webkit-flex-flow: row wrap;
+		    flex-flow: row wrap;
+		    text-align: center;
+		}
+
+		.flex-container > * {
+		    padding: 15px;
+		    -webkit-flex: 1 100%;
+		    flex: 1 100%;
+		}
+
+		.article {
+		    text-align: left;
+		}
+
+		header {background: #428bca;color:white;}
+		footer {background: #aaa;color:white;}
+		.nav {background:#eee;}
+
+		.nav ul {
+        margin-left: 3em;
+		    list-style-type: disc;;
+		    padding: 0;
+		}
+		.nav ul a {
+		    text-decoration: none;
+		}
+
+		.aside {
+			text-align: left;
+			border-left: thin solid black;
+		}
+
+		@media all and (min-width: 768px) {
+		    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+		    .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+				.aside {-webkit-flex:2 0px;flex:2 0px;-webkit-order:3;order:3;}
+		    footer {-webkit-order:4;order:4;}
+		}
+    </style>
+</head>
+
+<body>
+
+    <div class="flex-container">
+
+        <header>
+            <h1>Address Book Home</h1>
+        </header>
+
+        <nav class="nav">
+            <h2>Options:</h2>
+            <ul>
+                <li><a href="addContacts">Add Contacts</a></li>
+                <li><a href="viewContacts">View Contacts</a></li>
+                <li><a href="editContacts">Edit Contacts</a></li>
+                <li><a href="deleteContacts">Delete Contacts</a></li>
+            </ul>
+        </nav>
+
+        <article class="article">
+            <h1>Welcome to your address book </h1>
+            <p>To get started select an option from the options menu. </p>
+        </article>
+    </div>
+</body>
+
+</html>
