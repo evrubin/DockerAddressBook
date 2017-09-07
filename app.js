@@ -12,12 +12,12 @@
 
  app.use("/",mainRouter);
  app.use("/addContact",mainRouter);
+ app.use("/viewContacts",mainRouter);
 
  //Add an array for the storage of contacts:
  contacts = [];
 
 io.on('connection', function(socket){
-
  //The function used to add a contact to the array
   socket.on('add', function(data){
     var personFound = 0;
@@ -37,7 +37,6 @@ io.on('connection', function(socket){
       socket.emit('addSuccess');
     }
   });
-
 
 });
  http.listen(process.env.PORT || 8080, function(){

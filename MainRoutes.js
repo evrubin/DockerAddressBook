@@ -18,4 +18,10 @@ mainRouter.get('/addContacts', function(req, res){
   res.status(200);
 });
 
+//The function used to get the view contacts html page:
+mainRouter.get('/viewContacts', function(req, res){
+  res.sendfile(path.join(__dirname, 'views','viewContacts.html'));
+  res.status(200);
+});
+
 module.exports = mainRouter;
