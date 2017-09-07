@@ -5,9 +5,10 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
 
-function setCookie(pos) {
-    createCookie("position",pos,0.25);
-  }
+function setData(pos){
+  createCookie("position",pos,0.25);
+  window.open("/editContacts","_self")
+}
 
 //will create a cookie to store data acccross the pages
 function createCookie(name, value, days) {
@@ -36,7 +37,8 @@ function fetchContacts(){
       "<strong>Surame:</strong> "+data[i].surname+"<br />"+
       "<strong>Cell Number:</strong> "+data[i].cellNum+"<br />"+
       "<strong>Home Number:</strong> "+data[i].homeNum+"<br />"+
-      "<strong>Email:</strong> "+data[i].email+"<br />"+"<a href=\"editContact\">Edit Contact</a>"+"<br />"+"<br />";
+      "<strong>Email:</strong> "+data[i].email+"<br />"+
+      "<input id=\"clickMe\" type=\"button\" value=\"Edit Contact\" onclick=\"setData("+i+");\" />"+"<br />"+"<br />";
     }
 
     contacts.innerHTML=allDetails;
