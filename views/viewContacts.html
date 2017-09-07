@@ -38,13 +38,24 @@ function fetchContacts(){
       "<strong>Cell Number:</strong> "+data[i].cellNum+"<br />"+
       "<strong>Home Number:</strong> "+data[i].homeNum+"<br />"+
       "<strong>Email:</strong> "+data[i].email+"<br />"+
-      "<input id=\"clickMe\" type=\"button\" value=\"Edit Contact\" onclick=\"setData("+i+");\" />"+"<br />"+"<br />";
+      "<input id=\"edit\" type=\"button\" value=\"Edit Contact\" onclick=\"setData("+i+");\" />"+
+      "<input id=\"delete\" type=\"button\" value=\"Delete Contact\" onclick=\"deleteContact("+i+");\" />"+"<br />"+"<br />";
     }
 
     contacts.innerHTML=allDetails;
   });
 
 }
+
+  function deleteContact(pos){
+    if (confirm('Are you sure you want to delete this contact?')) {
+      socket.emit('deleteContact', pos);
+      socket.on('deleteSuccess',function(data){
+      window.alert('Contact Deleted Successfully');
+      window.open("/viewContacts","_self")
+    });
+    }
+  }
 
 </script>
 
@@ -103,15 +114,15 @@ function fetchContacts(){
     <div class="flex-container">
 
         <header>
-            <h1>Address Book View Contacts</h1>
+            <h1>Manage Contacts</h1>
         </header>
 
         <nav class="nav">
             <h2>Options:</h2>
             <ul>
+                <li><a href="/">Home</a></li>
                 <li><a href="addContacts">Add Contacts</a></li>
-                <li>View/Edit Contacts</a></li>
-                <li><a href="deleteContacts">Delete Contacts</a></li>
+                <li>Manage Contacts</a></li>
             </ul>
         </nav>
 

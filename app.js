@@ -63,7 +63,10 @@ io.on('connection', function(socket){
     socket.emit('updateSuccess');
   });
 
-
+  socket.on('deleteContact', function(pos){
+    contacts.splice(pos, 1);
+    socket.emit('deleteSuccess');
+  });
 
   //Function to help sort the list
   function orderBy(prop) {
