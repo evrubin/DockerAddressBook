@@ -38,7 +38,7 @@ io.on('connection', function(socket){
       //Sort the object alphabetically
       //Future functionality to sort by other options
       contacts.sort(orderBy("name"));
-      socket.emit('addSuccess');
+      socket.emit('addSuccess', true);
     }
   });
 
@@ -60,17 +60,17 @@ io.on('connection', function(socket){
     }
     contacts[data.pos]=contact;
 
-    socket.emit('updateSuccess');
+    socket.emit('updateSuccess', true);
   });
 
   socket.on('deleteContact', function(pos){
     contacts.splice(pos, 1);
-    socket.emit('deleteSuccess');
+    socket.emit('deleteSuccess', true);
   });
 
   socket.on('sort', function(prop){
     contacts.sort(orderBy(prop));
-    socket.emit('sorted');
+    socket.emit('sorted', true);
   })
 
   //Function to help sort the list
