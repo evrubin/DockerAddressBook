@@ -57,6 +57,13 @@ function fetchContacts(){
     }
   }
 
+
+  function sortBy(prop){
+    socket.emit('sort', prop);
+    socket.on('sorted', function(){
+      window.open("/viewContacts","_self")
+    });
+  }
 </script>
 
 <head>
@@ -127,8 +134,8 @@ function fetchContacts(){
         </nav>
 
         <article class="article">
-            <h1>Welcome to your address book </h1>
             <p>A list of your contacts can be found below: </p>
+            <p>Sort contacts by: <a href="javascript:sortBy('name');">First Name</a>/<a href="javascript:sortBy('surname');">Surname</a></p>
             <p></p>
             <p><span id="contacts"></span></p>
         </article>

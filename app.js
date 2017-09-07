@@ -68,6 +68,11 @@ io.on('connection', function(socket){
     socket.emit('deleteSuccess');
   });
 
+  socket.on('sort', function(prop){
+    contacts.sort(orderBy(prop));
+    socket.emit('sorted');
+  })
+
   //Function to help sort the list
   function orderBy(prop) {
     return function(a, b){
