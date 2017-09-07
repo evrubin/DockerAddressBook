@@ -13,6 +13,8 @@
  app.use("/",mainRouter);
  app.use("/addContact",mainRouter);
  app.use("/viewContacts",mainRouter);
+ app.use("/editContacts",mainRouter);
+ 
  //Add an array for the storage of contacts:
  contacts = [];
 

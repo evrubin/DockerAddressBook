@@ -24,4 +24,9 @@ mainRouter.get('/viewContacts', function(req, res){
   res.status(200);
 });
 
+//The function used to get the edit contacts html page:
+mainRouter.get('/editContacts', function(req, res){
+  res.sendfile(path.join(__dirname, 'views','editContacts.html'));
+  res.status(200);
+});
 module.exports = mainRouter;
