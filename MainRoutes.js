@@ -12,4 +12,10 @@ mainRouter.get('/', function(req, res){
   res.status(200);
 });
 
+//The function used to get the add new contact html page:
+mainRouter.get('/addContacts', function(req, res){
+  res.sendfile(path.join(__dirname, 'views','addContacts.html'));
+  res.status(200);
+});
+
 module.exports = mainRouter;
