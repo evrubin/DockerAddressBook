@@ -14,7 +14,7 @@
  app.use("/addContact",mainRouter);
  app.use("/viewContacts",mainRouter);
  app.use("/editContacts",mainRouter);
- 
+
  //Add an array for the storage of contacts:
  contacts = [];
 
@@ -42,6 +42,29 @@ io.on('connection', function(socket){
     }
   });
 
+  //The function used to get all the contacts
+  socket.on('fetchContactList', function(){
+    socket.emit('getContactList', contacts);
+  });
+  //The function used to get a specific contact
+  socket.on('getContact', function(pos){
+    socket.emit('recvContact', contacts[pos]);
+  });
+
+  socket.on('updateContact', function(data){
+    var contact = {
+      name: data.name,
+      surname: data.surname,
+      cellNum: data.cellNum,
+      homeNum: data.homeNum
+    }
+    contacts[data.pos]=contact;
+
+    socket.emit('updateSuccess');
+  });
+
+
+
   //Function to help sort the list
   function orderBy(prop) {
     return function(a, b){
@@ -54,10 +77,6 @@ io.on('connection', function(socket){
         return 0;
     }
   }
-
-  socket.on('fetchContactList', function(){
-    socket.emit('getContactList', contacts);
-  });
 });
 
  http.listen(process.env.PORT || 8080, function(){
