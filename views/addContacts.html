@@ -16,16 +16,30 @@
   function addContact(){
 
     //Get the values from the form
-      var formVals = document.getElementById("frm1");
-      //Validate info
-      var contact = {
-        name: formVals.elements[0].value,
-        surname: formVals.elements[1].value,
-        cellNum: formVals.elements[2].value,
-        homeNum: formVals.elements[3].value,
-        email: formVals.elements[4].value
+    var formVals = document.getElementById("frm1");
+    //Validate info
+    var contact = {
+      name: formVals.elements[0].value,
+      surname: formVals.elements[1].value,
+      cellNum: formVals.elements[2].value,
+      homeNum: formVals.elements[3].value,
+      email: formVals.elements[4].value
+    }
+    var blanks=0;
+    for (var property in contact) {
+      if (contact.hasOwnProperty(property)) {
+        if (contact[property]==""){
+          blanks++;
+        }
       }
+    }
+    //Check if all fields are blank and if at least a name or surname was entered
+    if (blanks<5){
       socket.emit('add', contact);
+    }
+    else{
+      window.alert('Please ensure you at least enter a persons Name or Surname');
+    }
   }
 </script>
 <head>
