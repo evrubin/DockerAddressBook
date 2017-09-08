@@ -41,7 +41,10 @@ function fetchContacts(){
       "<input id=\"edit\" type=\"button\" value=\"Edit Contact\" onclick=\"setData("+i+");\" />"+
       "<input id=\"delete\" type=\"button\" value=\"Delete Contact\" onclick=\"deleteContact("+i+");\" />"+"<br />"+"<br />";
     }
-
+    //Add if to check if there are contacts.
+    if(data.length>0){
+      allDetails = allDetails+"<br />"+"<br />"+"<input id=\"deleteAll\" type=\"button\" value=\"Delete All Contacts\" onclick=\"deleteAllContacts();\" />"+"<br />"+"<br />"
+    }
     contacts.innerHTML=allDetails;
   });
 
@@ -55,6 +58,15 @@ function fetchContacts(){
       window.open("/viewContacts","_self")
     });
     }
+  }
+
+  function deleteAllContacts(){
+    if (confirm('Are you sure you want to delete all saved contacts?')) {
+      socket.emit('deleteAllContacts');
+      socket.on('deleteAllSuccess',function(data){
+      window.alert('Contacts Deleted Successfully');
+      window.open("/viewContacts","_self")
+    });
   }
 
 
