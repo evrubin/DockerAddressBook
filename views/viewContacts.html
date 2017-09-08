@@ -64,11 +64,11 @@ function fetchContacts(){
     if (confirm('Are you sure you want to delete all saved contacts?')) {
       socket.emit('deleteAllContacts');
       socket.on('deleteAllSuccess',function(data){
-      window.alert('Contacts Deleted Successfully');
+        window.alert('Contacts Deleted Successfully');
       window.open("/viewContacts","_self")
-    });
+        });
+    }
   }
-
 
   function sortBy(prop){
     socket.emit('sort', prop);
