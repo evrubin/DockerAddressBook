@@ -10,7 +10,7 @@ The implementation was written in JavaScript and HTML.
 
 The folder structure contains the source code, this README File, the docker file used to dockerize the application, a JSON file showing all the packages used and a folder containing all the required node modules.
 
-The docker image of this application can be found at: https://hub.docker.com/r/evrubin/dockeraddressbook/
+The docker image of this application can be found at: https://hub.docker.com/r/evrubin/dockeraddressbook/  
 To pull the docker image use the following command: docker pull evrubin/dockeraddressbook
 
 ------------
